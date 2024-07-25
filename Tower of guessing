@@ -1,7 +1,19 @@
 -- Este script debe estar en el LocalScript dentro de StarterPlayerScripts
 
--- Variable para almacenar la notificación
+-- Variable para almacenar la notificación y el botón de copiar
 local notification = nil
+local copyButton = nil
+
+-- Función para copiar el texto al portapapeles
+local function copyToClipboard(text)
+    local success, err = pcall(function()
+        local HttpService = game:GetService("HttpService")
+        setclipboard(text) -- Copia el texto al portapapeles
+    end)
+    if not success then
+        warn("Error al copiar al portapapeles: " .. err)
+    end
+end
 
 -- Función para encontrar la puerta más cercana
 local function findClosestDoor()
@@ -57,7 +69,7 @@ local function updateNotification()
                 local screenGui = Instance.new("ScreenGui")
                 screenGui.Parent = playerGui
 
-                notification = Instance.new("TextLabel")
+                notification = Instance.new("TextBox") -- Cambia TextLabel a TextBox
                 notification.Parent = screenGui
                 notification.Position = UDim2.new(0.5, -100, 0.1, 0)
                 notification.Size = UDim2.new(0, 200, 0, 50)
@@ -65,6 +77,20 @@ local function updateNotification()
                 notification.TextColor3 = Color3.new(1, 1, 1)
                 notification.TextSize = 20
                 notification.TextStrokeTransparency = 0.5
+                notification.ClearTextOnFocus = false -- Asegura que el texto no se borre al hacer clic
+                notification.TextEditable = false -- Hacer el texto no editable
+
+                copyButton = Instance.new("TextButton")
+                copyButton.Parent = screenGui
+                copyButton.Position = UDim2.new(0.5, -50, 0.2, 0)
+                copyButton.Size = UDim2.new(0, 100, 0, 50)
+                copyButton.BackgroundColor3 = Color3.new(0, 0, 0)
+                copyButton.TextColor3 = Color3.new(1, 1, 1)
+                copyButton.TextSize = 20
+                copyButton.Text = "Copiar"
+                copyButton.MouseButton1Click:Connect(function()
+                    copyToClipboard(notification.Text)
+                end)
             end
 
             -- Actualiza el texto de la notificación con el nombre de la puerta
@@ -77,8 +103,8 @@ local function updateNotification()
     end
 end
 
--- Ejecutar la función cada segundo para actualizar la notificación
+-- Ejecutar la función cada 0.1 segundos para actualizar la notificación
 while true do
     updateNotification()
-    wait(1) -- Espera 1 segundo antes de la siguiente actualización
+    wait(0.1) -- Espera 0.1 segundos antes de la siguiente actualización
 end
