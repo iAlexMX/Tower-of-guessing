@@ -1,0 +1,84 @@
+-- Este script debe estar en el LocalScript dentro de StarterPlayerScripts
+
+-- Variable para almacenar la notificación
+local notification = nil
+
+-- Función para encontrar la puerta más cercana
+local function findClosestDoor()
+    local player = game.Players.LocalPlayer
+    local character = player.Character or player.CharacterAdded:Wait()
+    local humanoidRootPart = character:WaitForChild("HumanoidRootPart")
+    
+    local closestDoor = nil
+    local shortestDistance = math.huge
+
+    -- Busca la carpeta 'Floors' dentro de 'workspace.Game'
+    local floorsFolder = workspace:FindFirstChild("Game"):FindFirstChild("Floors")
+    if not floorsFolder then
+        print("No se encontró la carpeta 'Floors' en 'workspace.Game'.")
+        return
+    end
+
+    -- Función recursiva para buscar puertas dentro de un objeto
+    local function findDoorsInObject(obj)
+        for _, child in pairs(obj:GetChildren()) do
+            if child:IsA("BasePart") then
+                local distance = (humanoidRootPart.Position - child.Position).Magnitude
+                if distance < shortestDistance then
+                    shortestDistance = distance
+                    closestDoor = child
+                end
+            elseif child:IsA("Model") then
+                findDoorsInObject(child) -- Busca puertas dentro de modelos
+            end
+        end
+    end
+
+    -- Recorre las carpetas de pisos
+    for _, floor in pairs(floorsFolder:GetChildren()) do
+        findDoorsInObject(floor)
+    end
+
+    return closestDoor
+end
+
+-- Función para actualizar la notificación
+local function updateNotification()
+    local player = game.Players.LocalPlayer
+    local door = findClosestDoor()
+    if door then
+        local main = door:FindFirstChild("Main")
+        if main and main:IsA("StringValue") then
+            local doorName = main.Value
+
+            -- Crear o actualizar la notificación en la interfaz del jugador
+            local playerGui = player:WaitForChild("PlayerGui")
+            if not notification then
+                local screenGui = Instance.new("ScreenGui")
+                screenGui.Parent = playerGui
+
+                notification = Instance.new("TextLabel")
+                notification.Parent = screenGui
+                notification.Position = UDim2.new(0.5, -100, 0.1, 0)
+                notification.Size = UDim2.new(0, 200, 0, 50)
+                notification.BackgroundColor3 = Color3.new(0, 0, 0)
+                notification.TextColor3 = Color3.new(1, 1, 1)
+                notification.TextSize = 20
+                notification.TextStrokeTransparency = 0.5
+            end
+
+            -- Actualiza el texto de la notificación con el nombre de la puerta
+            notification.Text = doorName
+        else
+            print("No se encontró el objeto 'Main' en la puerta o no es un StringValue.")
+        end
+    else
+        print("No se encontró ninguna puerta cercana.")
+    end
+end
+
+-- Ejecutar la función cada segundo para actualizar la notificación
+while true do
+    updateNotification()
+    wait(1) -- Espera 1 segundo antes de la siguiente actualización
+end
