@@ -40,6 +40,13 @@ local function findClosestDoor()
                     shortestDistance = distance
                     closestDoor = child
                 end
+
+                -- Eliminar los Attachments dentro de esta puerta
+                for _, attachment in pairs(child:GetChildren()) do
+                    if attachment:IsA("Attachment") then
+                        attachment:Destroy() -- Elimina el Attachment
+                    end
+                end
             elseif child:IsA("Model") then
                 findDoorsInObject(child) -- Busca puertas dentro de modelos
             end
