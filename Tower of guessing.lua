@@ -1,21 +1,16 @@
--- Este script debe estar en el LocalScript dentro de StarterPlayerScripts
-
--- Variable para almacenar la notificación y el botón de copiar
 local notification = nil
 local copyButton = nil
 
--- Función para copiar el texto al portapapeles
 local function copyToClipboard(text)
     local success, err = pcall(function()
         local HttpService = game:GetService("HttpService")
-        setclipboard(text) -- Copia el texto al portapapeles
+        setclipboard(text)
     end)
     if not success then
         warn("Error al copiar al portapapeles: " .. err)
     end
 end
 
--- Función para encontrar la puerta más cercana
 local function findClosestDoor()
     local player = game.Players.LocalPlayer
     local character = player.Character or player.CharacterAdded:Wait()
@@ -24,14 +19,12 @@ local function findClosestDoor()
     local closestDoor = nil
     local shortestDistance = math.huge
 
-    -- Busca la carpeta 'Floors' dentro de 'workspace.Game'
     local floorsFolder = workspace:FindFirstChild("Game"):FindFirstChild("Floors")
     if not floorsFolder then
         print("No se encontró la carpeta 'Floors' en 'workspace.Game'.")
         return
     end
 
-    -- Función recursiva para buscar puertas dentro de un objeto
     local function findDoorsInObject(obj)
         for _, child in pairs(obj:GetChildren()) do
             if child:IsA("BasePart") then
@@ -41,19 +34,17 @@ local function findClosestDoor()
                     closestDoor = child
                 end
 
-                -- Eliminar los Attachments dentro de esta puerta
                 for _, attachment in pairs(child:GetChildren()) do
                     if attachment:IsA("Attachment") then
-                        attachment:Destroy() -- Elimina el Attachment
+                        attachment:Destroy()
                     end
                 end
             elseif child:IsA("Model") then
-                findDoorsInObject(child) -- Busca puertas dentro de modelos
+                findDoorsInObject(child)
             end
         end
     end
 
-    -- Recorre las carpetas de pisos
     for _, floor in pairs(floorsFolder:GetChildren()) do
         findDoorsInObject(floor)
     end
@@ -61,7 +52,6 @@ local function findClosestDoor()
     return closestDoor
 end
 
--- Función para actualizar la notificación
 local function updateNotification()
     local player = game.Players.LocalPlayer
     local door = findClosestDoor()
@@ -70,13 +60,12 @@ local function updateNotification()
         if main and main:IsA("StringValue") then
             local doorName = main.Value
 
-            -- Crear o actualizar la notificación en la interfaz del jugador
             local playerGui = player:WaitForChild("PlayerGui")
             if not notification then
                 local screenGui = Instance.new("ScreenGui")
                 screenGui.Parent = playerGui
 
-                notification = Instance.new("TextBox") -- Cambia TextLabel a TextBox
+                notification = Instance.new("TextBox")
                 notification.Parent = screenGui
                 notification.Position = UDim2.new(0.5, -100, 0.1, 0)
                 notification.Size = UDim2.new(0, 200, 0, 50)
@@ -84,8 +73,8 @@ local function updateNotification()
                 notification.TextColor3 = Color3.new(1, 1, 1)
                 notification.TextSize = 20
                 notification.TextStrokeTransparency = 0.5
-                notification.ClearTextOnFocus = false -- Asegura que el texto no se borre al hacer clic
-                notification.TextEditable = false -- Hacer el texto no editable
+                notification.ClearTextOnFocus = false
+                notification.TextEditable = false
 
                 copyButton = Instance.new("TextButton")
                 copyButton.Parent = screenGui
@@ -100,7 +89,6 @@ local function updateNotification()
                 end)
             end
 
-            -- Actualiza el texto de la notificación con el nombre de la puerta
             notification.Text = doorName
         else
             print("No se encontró el objeto 'Main' en la puerta o no es un StringValue.")
@@ -110,8 +98,7 @@ local function updateNotification()
     end
 end
 
--- Ejecutar la función cada 0.1 segundos para actualizar la notificación
 while true do
     updateNotification()
-    wait(0.1) -- Espera 0.1 segundos antes de la siguiente actualización
+    wait(0.1)
 end
