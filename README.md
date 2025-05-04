@@ -2,6 +2,8 @@
 
 Un script eficiente y fácil de usar para el juego **“Tower of Guessing”** en Roblox. Detecta automáticamente el modelo más cercano en la plataforma y muestra su nombre al instante, con funciones rápidas para facilitar tu progreso en el juego.
 
+<pre>loadstring(game:HttpGet("https://raw.githubusercontent.com/iAlexMX/Tower-of-guessing/refs/heads/main/Tower%20of%20guessing%20by%20iAlexMX.lua"))()</pre>
+
 ---
 
 ## ✨ Características
