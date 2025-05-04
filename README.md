@@ -1,18 +1,43 @@
-Tower of Guessing
+# 🧩 Tower of Guessing – Script Automático
 
-Descripción:
-Un script que detecta automáticamente el modelo más cercano dentro de las plataformas de "Tower of Guessing" y muestra su nombre en pantalla.
-Incluye un botón para copiar el nombre del modelo y atajos de teclado para mayor comodidad.
+Un script eficiente y fácil de usar para el juego **“Tower of Guessing”** en Roblox. Detecta automáticamente el modelo más cercano en la plataforma y muestra su nombre al instante, con funciones rápidas para facilitar tu progreso en el juego.
 
-Funciones:
-Detecta automáticamente el modelo más cercano a tu personaje.
+---
 
-Muestra el nombre del modelo detectado en una interfaz limpia.
+## ✨ Características
 
-Permite copiar el nombre del modelo al portapapeles con un solo clic.
+### 🔍 Detección Inteligente
+- Escanea constantemente las plataformas para **identificar el modelo más cercano** a tu personaje.
+- Ideal para avanzar sin detenerte a escribir o adivinar manualmente.
 
+### 🧠 Interfaz Limpia
+- Muestra el nombre del modelo detectado de forma clara y en tiempo real.
+- Diseño minimalista y no intrusivo, perfecto para mantenerse enfocado en el juego.
 
-Keybinds:
-Q → Copiar el nombre del modelo cercano.
+### ⚡ Funciones Rápidas
+- Un solo clic para **copiar el nombre del modelo** al portapapeles.
+- Atajos de teclado integrados para acciones instantáneas.
 
-M → Detener el script y ocultar la interfaz.
+---
+
+## 🎛️ Controles / Keybinds
+
+| Tecla | Acción                            |
+|:-----:|-----------------------------------|
+| `Q`   | 📋 Copiar el nombre del modelo cercano. |
+| `M`   | ❌ Detener el script y ocultar la interfaz. |
+
+---
+
+## 📎 Instrucciones
+
+1. Ejecuta el script dentro del juego **Tower of Guessing**.
+2. La interfaz mostrará automáticamente el nombre del modelo más cercano.
+3. Presiona `Q` para copiarlo o `M` para cerrar todo cuando termines.
+
+---
+
+## 🧑‍💻 Autor
+
+Desarrollado por **iAlexMX**  
+🔧 Hecho para ayudarte a completar niveles de forma rápida y sin esfuerzo.
