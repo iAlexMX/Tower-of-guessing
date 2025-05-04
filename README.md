@@ -39,6 +39,13 @@ Un script eficiente y fácil de usar para el juego **“Tower of Guessing”** e
 
 ---
 
+## 🎮 Link del juego
+
+[[https://www.roblox.com/es/games/9306257030/Guess-It-Images](https://www.roblox.com/es/games/7666393362/Tower-of-Guessing)](https://www.roblox.com/es/games/7666393362/Tower-of-Guessing)
+
+
+---
+
 ## 🧑‍💻 Autor
 
 Desarrollado por **iAlexMX**  
