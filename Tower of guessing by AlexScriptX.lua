@@ -43,7 +43,7 @@ creditLabel.BackgroundTransparency = 100
 creditLabel.TextColor3 = Color3.new(1, 1, 1)
 creditLabel.TextScaled = true
 creditLabel.Font = Enum.Font.GothamSemibold
-creditLabel.Text = "by iAlexMX"
+creditLabel.Text = "by AlexScriptX"
 creditLabel.TextSize = 12
 creditLabel.Parent = frame
 
