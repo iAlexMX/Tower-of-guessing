@@ -48,5 +48,5 @@ https://www.roblox.com/es/games/7666393362/Tower-of-Guessing
 
 ## 🧑‍💻 Autor
 
-Desarrollado por **iAlexMX**  
+Desarrollado por **AlexScriptX**  
 🔧 Hecho para ayudarte a completar niveles de forma rápida y sin esfuerzo.
